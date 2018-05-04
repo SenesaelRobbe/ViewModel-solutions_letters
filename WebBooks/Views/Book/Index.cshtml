@@ -1,0 +1,16 @@
+﻿@using WebBooks.ViewModels
+@model BookListInfo
+<h2>List of Books</h2>
+<nav>
+    <ul>
+        @foreach (BookBasic book in Model.Books)
+        {
+            <li><a asp-action="Details" asp-route-id="@book.Id">@book.Title</a></li>
+        }
+    </ul>
+    <label class="label label-primary">
+        <label asp-for="NumberOfBooks"></label>: @Model.NumberOfBooks
+    </label>
+</nav>
+
+

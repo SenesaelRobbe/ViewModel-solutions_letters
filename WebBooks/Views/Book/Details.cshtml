@@ -1,0 +1,18 @@
+﻿@using WebBooks.ViewModels
+@model BookDetail
+<header>
+    <h1>@Model.Title</h1>
+</header>
+<article>
+    <ul>
+        <li><label asp-for="ISBN"></label>: @Model.ISBN </li>
+        <li><label asp-for="Author"></label>: @Model.Author</li>
+        <li><label asp-for="Publisher"></label>: @Model.Publisher</li>
+        <li><label asp-for="NumberOfPages"></label>: @Model.NumberOfPages </li>
+    </ul>
+    <img src="~/@Model.ImageUrl" /><br />
+</article>
+<nav>
+    <a asp-controller="Book" asp-action="Index" class="btn btn-primary">Back to list</a>
+</nav>
+

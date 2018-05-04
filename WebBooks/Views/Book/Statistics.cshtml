@@ -1,0 +1,84 @@
+﻿@using WebBooks.ViewModels
+@model BookStatistics
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>Bookstatistics</h1>
+        @*With Actionlink HtmlHelper: https://msdn.microsoft.com/nl-be/library/dd492124(v=vs.118).aspx*@
+        @for (int i = 65; i < 91; i++)
+        {
+
+            @Html.ActionLink(Convert.ToChar(i).ToString(),
+                "Statistics", "Book",
+                new
+                {
+                    inputstring = Convert.ToChar(i).ToString()
+                },
+                Convert.ToChar(i).ToString() != Model.Input ?
+                    new { @class = "inputstring" } :
+                    new { @class = "inputstring activeinput" }
+            )
+
+        }
+
+        <br />
+        @*With tag-helper: no htmloptions*@
+        @for (int i = 65; i < 91; i++)
+        {
+            <a asp-controller="Book"
+               asp-action="Statistics"
+               asp-route-inputString="@Convert.ToChar(i).ToString()"
+               class="inputstring">@Convert.ToChar(i).ToString()</a>
+
+
+        }
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-primary" style="margin-top:30px">
+            <div class="panel-heading">
+                <label asp-for="@Model.Input" class="label label-primary"></label>
+                <span class="badge">@Model.Input</span>
+            </div>
+        </div>
+
+        <span class="badge">
+            @Model.TotalNumberOfBooks
+        </span>
+        <label asp-for="@Model.TotalNumberOfBooks" class="label label-info"></label>
+        <br />
+        <span class="badge">@Model.NumberOfBooksStartingWith</span>
+        <label asp-for="@Model.NumberOfBooksStartingWith" class="label label-info"></label>
+        <br />
+        <span class="badge">
+            @Model.NumberOfBooksContaining
+        </span>
+        <label asp-for="@Model.NumberOfBooksContaining" class="label label-info"></label><br />
+        <span class="badge">
+            @Model.NumberOfAuthorsContaining
+        </span>
+        <label asp-for="@Model.NumberOfAuthorsContaining" class="label label-info"></label>
+        <br />
+        <span class="badge">@Model.NumberOfPublishersContaining</span>
+        <label asp-for="@Model.NumberOfPublishersContaining" class="label label-info"></label>
+        <br />
+    </div>
+</div>
+
+@*Normally in css-file, just to use a section*@
+@section styles {
+    <style type="text/css">
+        a:hover {
+            text-decoration: none !important;
+            color: red;
+        }
+
+        .inputstring {
+            letter-spacing: 1.5em;
+        }
+
+        .activeinput {
+            color: red;
+            font-size: larger;
+        }
+    </style>
+}
